@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bennections</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ET7YK3VDNL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ET7YK3VDNL');
+</script>
+
+<body>
+    <h1>Bennections</h1>
+    <p id="instructions">Find groups of four items that share something in common</p>
+
+    <div id="attempts-container">
+        Mistakes remaining: <span id="attempts-left">4</span>
+        <div id="attempt-circles">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <div id="solved-groups-area">
+        <!-- Solved groups will be rendered here -->
+    </div>
+
+    <div id="active-grid-area">
+        <!-- Word buttons will be loaded here -->
+    </div>
+
+    <div id="message-area"></div>
+
+    <div id="button-container">
+        <button id="shuffle-button">Shuffle</button>
+        <button id="deselect-all-button">Deselect All</button>
+        <button id="submit-guess" disabled>Submit</button>
+    </div>
+
+    <!-- Lose Overlay (Updated Content) -->
+    <div id="lose-overlay">
+        <!-- Changed text to an emoji -->
+        <div class="lose-content">😢</div>
+    </div>
+
+    <!-- Confetti Library (for fireworks) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Your game script -->
+    <script src="script.js"></script>
+</body>
+</html>
