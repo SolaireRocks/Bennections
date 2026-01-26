@@ -7,14 +7,99 @@ body {
     align-items: center;
     background-color: #f4f4f4;
     color: #333;
-    margin-top: 15px;
+    margin-top: 0; /* Reset margin */
+    padding-top: 60px; /* Add space for top bar */
     padding-bottom: 30px;
     overflow-x: hidden; /* Prevent horizontal scrollbars from confetti */
+}
+
+/* --- Top Bar & Auth Styles --- */
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    z-index: 100;
+}
+
+.nav-back {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+}
+
+.nav-back:hover {
+    color: #000;
+}
+
+.auth-container {
+    display: flex;
+    align-items: center;
+}
+
+.google-btn {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.google-btn:hover {
+    background-color: #f8f8f8;
+}
+
+.user-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+}
+
+.sign-out-link {
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.hidden {
+    display: none !important;
 }
 
 h1 {
     color: #5a5a5a;
     margin-bottom: 5px;
+    margin-top: 15px;
 }
 
 #instructions {

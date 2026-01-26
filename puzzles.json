@@ -1,71 +1,5 @@
 {
-  "2025-04-18": [
-    {
-      "category": "MY PANDA IS...",
-      "words": ["FUNNY", "CUTE", "SEXY", "BEAUTIFUL"],
-      "difficulty": 0
-    },
-    {
-      "category": "PRINCESS PUSSY",
-      "words": ["HAIRY", "WET", "FILLED WITH MY CUM", "LIKES THE ROSE"],
-      "difficulty": 1
-    },
-    {
-      "category": "PANDA DURING SEX",
-      "words": ["MOANS", "SCREAMS", "WRITHES", "GRINDS"],
-      "difficulty": 2
-    },
-    {
-      "category": "MY FAVORITE PLACES WITH PANDA",
-      "words": ["BED", "COUCH", "IN THE CAR", "WASHING MACHINE"],
-      "difficulty": 3
-    }
-  ],
-  "2025-04-21": [
-    {
-      "category": "THINGS THAT PANDA HATES",
-      "words": ["EVAN", "DAD", "MEAT", "BOARD"],
-      "difficulty": 0
-    },
-    {
-      "category": "THINGS THAT PANDA LIKES",
-      "words": ["BITEY", "ESTI", "KITTIES", "DICE TRAY"],
-      "difficulty": 1
-    },
-    {
-      "category": "FAVORITE GAMES",
-      "words": ["ANIMAL CROSSING", "BOGGLE", "MARIO", "CARDS"],
-      "difficulty": 2
-    },
-    {
-      "category": "TAYLOR SWIFT SONGS",
-      "words": ["MASTERMIND", "BLANK SPACE", "HAUNTED", "WONDERLAND"],
-      "difficulty": 3
-    }
-  ],
-"2025-04-22": [
-  {
-    "category": "HIGH, SLANG",
-    "words": ["BAKED", "BLAZED", "LIFTED", "STONED"],
-    "difficulty": 0
-  },
-  {
-    "category": "WAYS TO SMOKE MARIJUANA",
-    "words": ["BONG", "BOWL", "JOINT", "PIPE"],
-    "difficulty": 1
-  },
-  {
-    "category": "CANNABIS STRAIN DESCRIPTORS",
-    "words": ["DIESEL", "HAZE", "KUSH", "INDICA"],
-    "difficulty": 2
-  },
-  {
-    "category": "WORDS WITH 'WEED'",
-    "words": ["SKUNK", "KILLER", "MILK", "SEA"],
-    "difficulty": 3
-  }
-],
-  "2025-04-23": [
+  "2026-01-25": [
     {
       "category": "PLANETS",
       "words": ["MERCURY", "VENUS", "EARTH", "MARS"],
@@ -87,7 +21,7 @@
       "difficulty": 3
     }
   ],
-  "2025-04-24": [
+  "2026-01-26": [
      {
       "category": "FISH",
       "words": ["SALMON", "TUNA", "TROUT", "COD"],
@@ -109,7 +43,7 @@
       "difficulty": 3
     }
   ],
-   "2025-04-25": [
+   "2026-01-27": [
      {
       "category": "DOG BREEDS",
       "words": ["LABRADOR", "POODLE", "BEAGLE", "PUG"],
@@ -128,28 +62,6 @@
     {
       "category": "SCHOOL SUBJECTS",
       "words": ["MATH", "HISTORY", "SCIENCE", "ENGLISH"],
-      "difficulty": 3
-    }
-  ],
-   "2025-04-26": [
-     {
-      "category": "TYPES OF TREES",
-      "words": ["OAK", "MAPLE", "PINE", "BIRCH"],
-      "difficulty": 0
-    },
-    {
-      "category": "DRINKS",
-      "words": ["WATER", "JUICE", "SODA", "MILK"],
-      "difficulty": 1
-    },
-    {
-      "category": "BODY PARTS",
-      "words": ["HEAD", "ARM", "LEG", "FOOT"],
-      "difficulty": 2
-    },
-    {
-      "category": "SHAPES",
-      "words": ["CIRCLE", "SQUARE", "TRIANGLE", "STAR"],
       "difficulty": 3
     }
   ]

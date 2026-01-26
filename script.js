@@ -1,6 +1,62 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+// --- Firebase Configuration ---
+const firebaseConfig = {
+    apiKey: "AIzaSyArpjA7oxqiJD4YyCDmMxhL5LpdBUvxyfQ",
+    authDomain: "mini-crossword-a1649.firebaseapp.com",
+    projectId: "mini-crossword-a1649",
+    storageBucket: "mini-crossword-a1649.firebasestorage.app",
+    messagingSenderId: "661167541092",
+    appId: "1:661167541092:web:c17757b6d1dddede3ac871",
+    measurementId: "G-SN8LGRHSH8"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
 // START OF FILE script.js
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Element References ---
+    // --- Auth DOM Elements ---
+    const loginBtn = document.getElementById('google-login-btn');
+    const userDisplay = document.getElementById('user-display');
+    const userNameEl = document.getElementById('user-name');
+    const userAvatarEl = document.getElementById('user-avatar');
+    const signOutBtn = document.getElementById('sign-out-btn');
+
+    // --- Auth Logic ---
+    loginBtn.addEventListener('click', async () => {
+        try {
+            await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+            console.error("Login failed", error);
+        }
+    });
+
+    signOutBtn.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error("Sign out failed", error);
+        }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            loginBtn.classList.add('hidden');
+            userDisplay.classList.remove('hidden');
+            // Use nickname if available in profile (requires firestore lookup), 
+            // but for now display name is sufficient for the header
+            userNameEl.textContent = user.displayName; 
+            userAvatarEl.src = user.photoURL;
+        } else {
+            loginBtn.classList.remove('hidden');
+            userDisplay.classList.add('hidden');
+        }
+    });
+
+    // --- Game Element References ---
     const activeGridArea = document.getElementById('active-grid-area');
     const solvedGroupsArea = document.getElementById('solved-groups-area');
     const submitButton = document.getElementById('submit-guess');

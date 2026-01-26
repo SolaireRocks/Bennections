@@ -18,6 +18,23 @@
 </script>
 
 <body>
+    <!-- Navigation and Auth Header -->
+    <div class="top-bar">
+        <a href="/games" class="nav-back">← Back to Hub</a>
+        
+        <div class="auth-container">
+            <button id="google-login-btn" class="google-btn">
+                Sign in
+            </button>
+            
+            <div id="user-display" class="user-display hidden">
+                <span id="user-name" class="user-name"></span>
+                <img id="user-avatar" class="user-avatar" src="" alt="Avatar">
+                <button id="sign-out-btn" class="sign-out-link">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
     <h1>Bennections</h1>
     <p id="instructions">Find groups of four items that share something in common</p>
 
@@ -52,7 +69,8 @@
 
     <!-- Confetti Library (for fireworks) -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Your game script -->
-    <script src="script.js"></script>
+    
+    <!-- Changed to module to support Firebase imports -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
