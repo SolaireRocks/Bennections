@@ -1,115 +1,268 @@
-/* START OF FILE style.css */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --button-bg: #efefe6;
+    --button-selected: #5a5a5a;
+    --button-selected-text: #ffffff;
+    --diff-1: #f9df6d; /* Yellow */
+    --diff-2: #a0c35a; /* Green */
+    --diff-3: #b0c4ef; /* Blue */
+    --diff-4: #ba81c5; /* Purple */
+    --primary-btn: #000;
+    --primary-btn-text: #fff;
+}
 
 body {
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f4;
-    color: #333;
-    margin-top: 0; /* Reset margin */
-    padding-top: 60px; /* Add space for top bar */
-    padding-bottom: 30px;
-    overflow-x: hidden; /* Prevent horizontal scrollbars from confetti */
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- Top Bar & Auth Styles --- */
-.top-bar {
-    position: absolute;
+/* --- Start Screen / Lobby --- */
+.start-screen {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px 20px;
+    height: 100dvh;
+    background-color: var(--bg-color);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    background-color: transparent;
-    z-index: 100;
+    justify-content: flex-start; /* Start from top to allow scrolling */
+    z-index: 2000;
+    padding: 20px;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+.start-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .nav-back {
+    align-self: flex-start;
     text-decoration: none;
     color: #666;
     font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: color 0.2s;
+    margin-bottom: 20px;
 }
 
-.nav-back:hover {
-    color: #000;
+.logo-area {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
+.logo-area h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.date-display {
+    color: #666;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* --- Auth Section --- */
 .auth-container {
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 30px;
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
 .google-btn {
-    background-color: white;
-    color: #333;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 4px;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-}
-
-.google-btn:hover {
-    background-color: #f8f8f8;
-}
-
-.user-display {
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
-.user-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #333;
+.user-edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .user-avatar {
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    object-fit: cover;
     border: 2px solid #eee;
 }
 
-.sign-out-link {
+.input-label {
     font-size: 0.75rem;
-    color: #666;
-    text-decoration: underline;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.nickname-input {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    width: 100%;
+}
+
+.medal-counts {
+    display: flex;
+    gap: 15px;
+    background: #f4f4f4;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.sign-out-btn {
     background: none;
     border: none;
+    text-decoration: underline;
+    color: #666;
     cursor: pointer;
-    margin-left: 5px;
+    font-size: 0.85rem;
+    margin-top: 5px;
 }
 
-.hidden {
-    display: none !important;
+/* --- Buttons --- */
+.primary-btn {
+    background-color: var(--primary-btn);
+    color: var(--primary-btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s;
+    font-size: 1rem;
 }
 
-h1 {
-    color: #5a5a5a;
-    margin-bottom: 5px;
-    margin-top: 15px;
+.primary-btn.big-btn {
+    font-size: 1.2rem;
+    padding: 16px 40px;
+    margin-bottom: 30px;
+}
+
+.primary-btn:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+/* --- Leaderboard --- */
+.leaderboard-container {
+    width: 100%;
+    max-width: 500px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.leaderboard-container h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.leaderboard-table th {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 2px solid #000;
+    font-weight: 700;
+}
+
+.leaderboard-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.rank-col { width: 30px; font-weight: 700; color: #888; }
+.medal-col { text-align: center; }
+.mistake-col { text-align: center; }
+.time-col { text-align: right; font-family: monospace; font-weight: 600; }
+
+/* --- Game UI --- */
+.game-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 10px 40px 10px;
+    transition: opacity 0.5s ease;
+}
+
+.game-ui.hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 10px;
+}
+
+.game-title-small {
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.timer-container {
+    background: #eee;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
 #instructions {
-    margin-bottom: 15px;
-    max-width: 400px;
     text-align: center;
-    font-size: 0.95em;
+    margin-bottom: 15px;
+    color: #666;
 }
 
 #attempts-container {
+    text-align: center;
     margin-bottom: 15px;
     font-weight: bold;
 }
@@ -121,304 +274,175 @@ h1 {
 
 #attempt-circles span {
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
+    background-color: #5a5a5a;
     border-radius: 50%;
-    background-color: #bbb;
     margin: 0 2px;
-    transition: background-color 0.3s ease;
 }
-
 #attempt-circles span.used {
-    background-color: #e74c3c; /* Red for used attempts */
+    background-color: #e74c3c; /* Red for mistakes */
+    opacity: 0.5;
 }
 
+/* --- Game Grid --- */
 #solved-groups-area {
-    width: 90%;
-    max-width: 450px;
-    margin-bottom: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    position: relative;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.solved-group {
+    border-radius: 8px;
+    padding: 15px 10px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+.difficulty-1 { background-color: var(--diff-1); }
+.difficulty-2 { background-color: var(--diff-2); }
+.difficulty-3 { background-color: var(--diff-3); }
+.difficulty-4 { background-color: var(--diff-4); }
+
+.solved-group strong {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 #active-grid-area {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    width: 90%;
-    max-width: 450px; /* Ensure this is respected */
-    margin-bottom: 15px;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* min-height: 240px; */ /* REMOVED min-height to allow shrinking */
-    transition: background-color 0.5s ease, padding 0.5s ease, min-height 0.5s ease, border 0.5s ease, box-shadow 0.5s ease, margin-bottom 0.5s ease, opacity 0.5s ease;
-    border: 1px solid #ddd;
-    opacity: 1;
-    align-items: start; /* Align items within their grid cell to the top */
-    align-content: start; /* Pack rows to the top when space is available */
-    box-sizing: border-box; /* Include padding in width calculation */
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.5s ease;
 }
 
-/* Style to hide the grid area when game is won */
 #active-grid-area.game-won-hidden {
-    padding: 0;
-    /* min-height: 0; */ /* No longer needed to override min-height */
-    height: 0; /* Collapse height */
-    border-color: transparent; /* Hide border */
-    background-color: transparent; /* Hide background */
-    box-shadow: none; /* Hide shadow */
-    margin-bottom: 0; /* Remove margin */
-    opacity: 0; /* Fade out */
-    overflow: hidden; /* Prevent content spill during transition */
-    /* Ensure transition applies */
-    transition: opacity 0.5s ease, height 0.5s ease 0.1s, padding 0.5s ease, margin-bottom 0.5s ease, border-color 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease, min-height 0.5s ease;
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
 }
-
 
 .word-button {
-    /* Padding adjustments */
-    padding: 10px 5px; /* More vertical padding */
-    font-size: 0.95em; /* Default font size */
-    font-weight: bold;
-    text-align: center;
-    background-color: #efefef;
+    background-color: var(--button-bg);
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.3s ease, color 0.2s ease, border-color 0.2s ease, font-size 0.2s ease; /* Added font-size transition */
+    border-radius: 6px;
+    padding: 10px 5px;
+    font-weight: 700;
+    font-size: 0.85rem;
     text-transform: uppercase;
+    cursor: pointer;
+    min-height: 80px;
+    color: var(--text-color);
+    transition: transform 0.1s, background-color 0.2s;
     user-select: none;
-    height: 65px; /* Keep fixed height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-
-    /* --- Word Wrapping & Overflow Prevention --- */
-    white-space: normal;       /* Ensure text wraps (default) */
-    min-width: 0;              /* CRUCIAL for grid items to shrink */
-    overflow: hidden;          /* Hide content that absolutely won't fit */
-    /* ------------------------------------------ */
 }
 
-/* Class to shrink text if needed */
-.word-button.small-text {
-    font-size: 0.82em; /* Smaller font size - adjust as needed */
-    line-height: 1.1;  /* Adjust line height if multi-line small text occurs */
-}
-
-
-.word-button:hover:not(.selected):not([disabled]):not(.fading-out) {
-    background-color: #e0e0e0;
-    border-color: #ccc;
-}
+.word-button.small-text { font-size: 0.65rem; }
 
 .word-button.selected {
-    background-color: #5a5a5a;
-    color: white;
-    border-color: #5a5a5a;
-    transform: scale(0.95);
+    background-color: var(--button-selected);
+    color: var(--button-selected-text);
 }
 
-/* Style for buttons fading out after a correct guess */
-.word-button.fading-out {
-    opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    pointer-events: none;
-    cursor: default;
-}
+.word-button:disabled { cursor: default; }
 
-
-/* Style for removing button space AFTER fade (if needed) */
-.word-button.removing {
-    opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
-    min-height: 0 !important;
-    height: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    font-size: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease 0.1s, padding 0.3s ease, margin 0.3s ease, min-height 0.3s ease, font-size 0.3s ease;
-}
-
-
-.word-button:disabled:not(.removing):not(.fading-out) {
-    background-color: #f8f8f8;
-    color: #aaa;
-    cursor: default;
-    opacity: 0.7;
-    border-color: #eee;
-}
-
+.word-button.shake { animation: shake 0.4s; background-color: #777; color: white; }
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
 
-.shake {
-    animation: shake 0.3s ease-in-out;
-}
-
+/* --- Controls --- */
 #button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
 }
-
 #button-container button {
-    padding: 10px 15px;
-    font-size: 1em;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
+    padding: 10px 18px;
+    border-radius: 20px;
     border: 1px solid #ccc;
-    background-color: #fff;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
 }
-#button-container button:hover:not([disabled]) {
-    background-color: #f0f0f0;
-}
-#button-container button:disabled {
-    background-color: #eee;
-    color: #aaa;
-    cursor: not-allowed;
-    border-color: #ddd;
-}
-
-/* --- Submit Button Styles --- */
-#submit-guess {
-    background-color: #5a5a5a;
-    color: black; /* Kept as black */
-    border-color: #4a4a4a;
-    font-weight: bold;
-}
-#submit-guess:hover:not([disabled]) {
-    background-color: #4e4e4e;
-    color: black; /* Kept as black */
-    border-color: #4a4a4a;
-}
-#submit-guess:disabled {
-    background-color: #cccccc;
-    color: #666666;
-    cursor: not-allowed;
-    border-color: #cccccc;
-}
-/* -------------------------------- */
-
+#submit-guess { border: 1px solid #000; color: #000; }
+#submit-guess:disabled { border-color: #ccc; color: #ccc; }
 
 #message-area {
-    min-height: 25px;
-    margin-bottom: 15px;
-    font-weight: bold;
+    min-height: 30px;
     text-align: center;
-    transition: color 0.3s ease, opacity 0.3s ease;
-    opacity: 1;
-}
-
-#message-area.hidden {
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
     opacity: 0;
+    transition: opacity 0.3s;
 }
+#message-area.message { opacity: 1; background: #333; color: white; display: inline-block; }
+#message-area.hidden { opacity: 0; }
 
-
-.message.correct {
-    color: #2ecc71; /* Green */
-}
-
-.message.incorrect {
-    color: #e74c3c; /* Red */
-}
-.message.info { /* Style for 'One away!' or 'Already Guessed' */
-    color: #f39c12; /* Orange/Yellow */
-}
-
-
-.solved-group {
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 0.95em;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(15px); /* Start slightly lower */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-}
-
-/* Class added dynamically when group should appear */
-.solved-group.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Define background colors based on difficulty */
-.solved-group.difficulty-0 { background-color: #fdea8d; border: 1px solid #eac85f; } /* Yellow */
-.solved-group.difficulty-1 { background-color: #a0e8a7; border: 1px solid #7dc985; } /* Green */
-.solved-group.difficulty-2 { background-color: #a4cbf5; border: 1px solid #7eaad8; } /* Blue */
-.solved-group.difficulty-3 { background-color: #d0a6e8; border: 1px solid #b588cf; } /* Purple */
-
-.solved-group strong {
-    display: block;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-
-#active-grid-area.game-over:not(.game-won-hidden) { /* Style for grid when game is lost */
-    background-color: #e9e9e9;
-    opacity: 0.8;
-}
-
-/* --- Lose Overlay Styles --- */
-#lose-overlay {
+/* --- Modal & Overlay --- */
+.modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.95);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 3000;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* Fade out */
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.modal-overlay:not(.hidden) { opacity: 1; pointer-events: auto; }
+
+.modal {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    width: 90%;
+    max-width: 350px;
 }
 
-#lose-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease; /* Fade in */
-}
+.medal-reveal { font-size: 4rem; margin: 10px 0; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-#lose-overlay .lose-content {
-    color: white;
-    font-size: 25vmin;
-    font-weight: bold;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-    transform: scale(0.5);
+.modal h2 { margin: 0 0 10px 0; }
+.medal-text { font-size: 1.1rem; font-weight: 600; color: #555; margin-bottom: 20px; }
+
+.modal-stats { margin-bottom: 25px; }
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 4px; }
+.final-stat { font-weight: 700; }
+
+/* Lose Overlay */
+#lose-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2500;
     opacity: 0;
-    animation: popIn 0.4s ease-out 0.1s forwards;
+    pointer-events: none;
+    transition: opacity 0.3s;
 }
+#lose-overlay.visible { opacity: 1; }
+.lose-content { font-size: 5rem; background: white; border-radius: 50%; padding: 20px; }
 
-@keyframes popIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+.hidden { display: none !important; }
 
-/* Helper class to hide elements */
-.hidden {
-    display: none !important;
-}
-/* ----------------------- */
-
-
-/* END OF FILE style.css */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

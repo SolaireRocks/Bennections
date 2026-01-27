@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bennections</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -18,59 +20,130 @@
 </script>
 
 <body>
-    <!-- Navigation and Auth Header -->
-    <div class="top-bar">
+
+    <!-- START SCREEN (Lobby) -->
+    <div id="start-screen" class="start-screen">
         <a href="/games" class="nav-back">← Back to Hub</a>
         
+        <div class="logo-area">
+            <h1>Bennections</h1>
+            <p class="date-display" id="start-date-display">Loading...</p>
+        </div>
+
+        <!-- Auth Section -->
         <div class="auth-container">
             <button id="google-login-btn" class="google-btn">
-                Sign in
+                Sign in to Save Stats
             </button>
             
-            <div id="user-display" class="user-display hidden">
-                <span id="user-name" class="user-name"></span>
+            <div id="user-display" class="user-edit-container hidden">
                 <img id="user-avatar" class="user-avatar" src="" alt="Avatar">
-                <button id="sign-out-btn" class="sign-out-link">Sign Out</button>
+                
+                <label class="input-label">Leaderboard Name</label>
+                <input type="text" id="nickname-input" class="nickname-input" maxlength="15" placeholder="Enter Name">
+                
+                <!-- Medal Counts -->
+                <div id="medal-counts" class="medal-counts" style="display:none;">
+                    <div class="medal-item">🥇 <span id="gold-count">0</span></div>
+                    <div class="medal-item">🥈 <span id="silver-count">0</span></div>
+                    <div class="medal-item">🥉 <span id="bronze-count">0</span></div>
+                </div>
+
+                <button id="sign-out-btn" class="sign-out-btn">Sign Out</button>
             </div>
         </div>
-    </div>
 
-    <h1>Bennections</h1>
-    <p id="instructions">Find groups of four items that share something in common</p>
+        <button id="start-btn" class="primary-btn big-btn">Start Game</button>
 
-    <div id="attempts-container">
-        Mistakes remaining: <span id="attempts-left">4</span>
-        <div id="attempt-circles">
-            <span></span><span></span><span></span><span></span>
+        <!-- Leaderboard Section -->
+        <div class="leaderboard-container">
+            <h3>Top Scores Today</h3>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th class="rank-col">#</th>
+                        <th>Player</th>
+                        <th class="medal-col">Medal</th>
+                        <th class="mistake-col">Mistakes</th>
+                        <th class="time-col">Time</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <tr><td colspan="5" style="text-align:center; color:#888;">Loading scores...</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div id="solved-groups-area">
-        <!-- Solved groups will be rendered here -->
+    <!-- GAME UI (Hidden Initially) -->
+    <div id="game-ui" class="game-ui hidden">
+        <!-- Navigation Header -->
+        <div class="top-bar">
+            <div class="header-left">
+                <span class="game-title-small">Bennections</span>
+            </div>
+            <div class="timer-container">
+                <span id="timer">00:00</span>
+            </div>
+        </div>
+
+        <p id="instructions">Find groups of four items that share something in common</p>
+
+        <div id="attempts-container">
+            Mistakes remaining: <span id="attempts-left">4</span>
+            <div id="attempt-circles">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <div id="solved-groups-area">
+            <!-- Solved groups will be rendered here -->
+        </div>
+
+        <div id="active-grid-area">
+            <!-- Word buttons will be loaded here -->
+        </div>
+
+        <div id="message-area"></div>
+
+        <div id="button-container">
+            <button id="shuffle-button">Shuffle</button>
+            <button id="deselect-all-button">Deselect All</button>
+            <button id="submit-guess" disabled>Submit</button>
+        </div>
     </div>
 
-    <div id="active-grid-area">
-        <!-- Word buttons will be loaded here -->
-    </div>
-
-    <div id="message-area"></div>
-
-    <div id="button-container">
-        <button id="shuffle-button">Shuffle</button>
-        <button id="deselect-all-button">Deselect All</button>
-        <button id="submit-guess" disabled>Submit</button>
-    </div>
-
-    <!-- Lose Overlay (Updated Content) -->
+    <!-- Lose Overlay -->
     <div id="lose-overlay">
-        <!-- Changed text to an emoji -->
         <div class="lose-content">😢</div>
     </div>
 
-    <!-- Confetti Library (for fireworks) -->
+    <!-- Victory Modal -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Puzzle Solved!</h2>
+            
+            <div id="modal-medal-icon" class="medal-reveal">🥇</div>
+            <div id="modal-medal-text" class="medal-text">You got the Gold Medal!</div>
+
+            <div class="modal-stats">
+                <div class="stat-row">
+                    <span>Time:</span>
+                    <span class="final-stat" id="final-time">00:00</span>
+                </div>
+                <div class="stat-row">
+                    <span>Mistakes:</span>
+                    <span class="final-stat" id="final-mistakes">0</span>
+                </div>
+            </div>
+            <button id="restart-btn" class="primary-btn">Back to Start</button>
+        </div>
+    </div>
+
+    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
-    <!-- Changed to module to support Firebase imports -->
+    <!-- Game Script -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
